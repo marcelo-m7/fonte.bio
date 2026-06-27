@@ -146,3 +146,4 @@ pnpm dlx shadcn@latest add accordion
 - Supabase de producao aplicado com schema inicial e frontend conectado por URL/chave publica.
 - Supabase Auth com login, criacao de conta e perfil basico em Definicoes.
 - Catalogo inicial com cadastro/listagem de fontes, colecoes, itens e videos derivados dos itens.
+- Pipeline inicial de ingestao com jobs manuais por fonte via Edge Function `ingest-source`.

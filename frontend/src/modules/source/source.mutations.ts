@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-import { createSource } from "./source.api"
+import { createIngestionJob, createSource } from "./source.api"
 import { sourceKeys } from "./source.keys"
 
 export function createSourceMutationOptions() {
@@ -17,6 +17,23 @@ export function useCreateSource() {
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: sourceKeys.all })
       void queryClient.invalidateQueries({ queryKey: ["dashboard"] })
+    },
+  })
+}
+
+export function createIngestionJobMutationOptions() {
+  return {
+    mutationFn: createIngestionJob,
+  }
+}
+
+export function useCreateIngestionJob() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    ...createIngestionJobMutationOptions(),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: sourceKeys.ingestionJobs() })
     },
   })
 }

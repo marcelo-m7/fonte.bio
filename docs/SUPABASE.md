@@ -121,6 +121,8 @@ Do not hand-edit migrations as the primary source of schema design.
 
 Do not run automatic `DROP`, `RESET`, broad `db push`, or destructive schema commands against production from agent automation. Production changes must be reviewed manually or delivered through a PR-approved deployment path.
 
+The production baseline was applied with `mcp_supabase_apply_migration` from the reviewed static schema on 2026-06-27. Future production DDL should still begin in `backend/supabase/schema/*.sql` and use a reviewed migration/deploy step.
+
 For production-impacting database changes, the PR must include:
 
 - Static schema diff summary.
@@ -163,6 +165,15 @@ VITE_SUPABASE_ANON_KEY
 
 Service role keys belong only in Supabase secrets or secure deployment environments.
 
+The production frontend uses the public project URL and publishable key through:
+
+```text
+VITE_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY
+```
+
+These are browser-exposed values. Do not replace them with service-role credentials.
+
 ## Local Commands
 
 Run commands from repository root unless stated otherwise.
@@ -180,4 +191,4 @@ If CLI flags change, prefer the official Supabase CLI help and keep this file up
 
 ## Current Phase
 
-This phase adopts the static schema workflow. No destructive remote operation is part of this change.
+The static schema workflow is active and the first production baseline is applied. Frontend reads now use the production Supabase project when public Vite variables are present.

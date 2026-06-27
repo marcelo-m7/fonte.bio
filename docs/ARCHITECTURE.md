@@ -4,7 +4,7 @@ Fonte.bio evolves through small pull requests with a simple functional modular a
 
 ## Current Base
 
-This branch is stacked on top of PR #2, `feat: prepare Supabase data boundary`, because the end-to-end foundation depends on the frontend mock/Supabase boundary introduced there.
+The current base includes the production Supabase baseline, the static schema workflow, and a frontend data boundary that can fall back to mock data when public Supabase variables are not configured.
 
 ## Frontend Organization
 
@@ -53,6 +53,13 @@ modules/<domain>/
 
 Only create files that carry real responsibility. Avoid empty architecture theater.
 
+Use TanStack Query for remote state in module shell files:
+
+- `*.queries.ts` exposes read hooks such as `useItems`.
+- `*.mutations.ts` exposes write hooks such as `useCreateItem`.
+- `*.api.ts` remains the only module file that calls Supabase directly.
+- Components and pages consume hooks, not the Supabase client.
+
 ## Functional Core / Imperative Shell
 
 Fonte.bio uses Functional Core / Imperative Shell.
@@ -87,6 +94,7 @@ Imperative shell files include:
 - `*.api.ts`
 - `*.queries.ts`
 - `*.mutations.ts`
+- TanStack Query hooks and cache invalidation
 - Edge Functions
 - Supabase access
 - uploads
@@ -103,10 +111,10 @@ Supabase source lives in `backend/supabase`.
 
 GitHub Supabase integration should use `backend` as the working directory.
 
-For this phase, use only two schemas:
+For this phase, use only two application schemas:
 
 - `public`: frontend-accessible data protected by RLS.
-- `private`: ingestion, AI, audit, rate limiting, and service-role-only tables.
+- `app_private`: ingestion, AI, audit, rate limiting, and service-role-only tables.
 
 Do not introduce extra schemas such as `core`, `vault`, `ingest`, `ai`, `social`, or `audit` yet unless a future PR gives a clear reason.
 
@@ -122,7 +130,7 @@ Suggested first tables for future migration PRs:
 - `collection_items`
 - `sources`
 
-### private
+### app_private
 
 - `ingestion_jobs`
 - `item_extractions`

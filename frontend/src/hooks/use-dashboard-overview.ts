@@ -1,51 +1,13 @@
-import { useEffect, useState } from "react"
+import { useQuery } from "@tanstack/react-query"
 
-import { getDashboardOverview } from "@/lib/api/dashboard"
-import type { DashboardOverview } from "@/lib/api/types"
-
-type DashboardState = {
-  data: DashboardOverview | null
-  isLoading: boolean
-  error: string | null
-}
+import { createDashboardOverviewQueryOptions } from "@/lib/api/dashboard"
 
 export function useDashboardOverview() {
-  const [state, setState] = useState<DashboardState>({
-    data: null,
-    isLoading: true,
-    error: null,
-  })
+  const query = useQuery(createDashboardOverviewQueryOptions())
 
-  useEffect(() => {
-    let cancelled = false
-
-    async function loadOverview() {
-      try {
-        const data = await getDashboardOverview()
-        if (cancelled) return
-
-        setState({
-          data,
-          isLoading: false,
-          error: null,
-        })
-      } catch (error) {
-        if (cancelled) return
-
-        setState({
-          data: null,
-          isLoading: false,
-          error: error instanceof Error ? error.message : "Falha ao carregar dashboard.",
-        })
-      }
-    }
-
-    loadOverview()
-
-    return () => {
-      cancelled = true
-    }
-  }, [])
-
-  return state
+  return {
+    data: query.data ?? null,
+    isLoading: query.isLoading,
+    error: query.error instanceof Error ? query.error.message : query.error ? "Falha ao carregar dashboard." : null,
+  }
 }

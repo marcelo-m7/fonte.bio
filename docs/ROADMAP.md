@@ -9,10 +9,11 @@ This roadmap keeps early work traceable and intentionally staged. Each stage sho
 3. `feat: establish end-to-end functional foundation` — adds architecture docs, functional modules, and versioned Supabase structure.
 4. `chore: adopt static Supabase schema workflow` — makes fixed SQL schema files the Supabase source of truth and keeps migrations secondary.
 5. `feat: integrate production Supabase with frontend` — applies the reviewed baseline remotely and connects frontend reads/writes through typed Supabase APIs.
-6. `feat: implement item creation and listing` — first user-visible item workflow.
-7. `feat: add ingestion jobs pipeline` — source ingestion jobs and operational statuses.
-8. `feat: add item processing Edge Function` — first real Edge Function flow.
-9. `feat: add AI enrichment MVP` — AI metadata enrichment with review workflow.
+6. `feat: add TanStack Query module hooks` — adds the remote-state foundation for item, collection, source, and dashboard data.
+7. `feat: implement item creation and listing` — first user-visible item workflow.
+8. `feat: add ingestion jobs pipeline` — source ingestion jobs and operational statuses.
+9. `feat: add item processing Edge Function` — first real Edge Function flow.
+10. `feat: add AI enrichment MVP` — AI metadata enrichment with review workflow.
 
 ## Etapa 0: GitHub Workflow
 
@@ -83,7 +84,7 @@ Deliverables:
 
 Goal: implement the first useful item catalog workflow.
 
-Status: production Supabase baseline is applied and module API shells are wired to typed Supabase queries. The next PR should add user-facing item forms and authenticated flows.
+Status: production Supabase baseline is applied and module API shells are wired to typed Supabase queries. TanStack Query should provide module read/write hooks before user-facing item forms and authenticated flows expand.
 
 Deliverables:
 

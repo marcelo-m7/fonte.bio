@@ -1,0 +1,2 @@
+-- Fonte.bio static schema SSOT: local-only seed data.
+-- Keep this file deterministic and free of production data, credentials, and tokens.

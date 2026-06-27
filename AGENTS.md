@@ -55,7 +55,18 @@ Each PR should be small and reviewable. Include:
 - Commands/checks executed.
 - Screenshots for UI changes.
 - Environment variables added or changed.
-- Migration and RLS notes for Supabase changes.
+- Static schema, derived migration, and RLS notes for Supabase changes.
+
+## Supabase Schema Workflow
+
+- Treat `backend/supabase/schema/*.sql` as the database source of truth.
+- Start every structural database change in the fixed schema files.
+- Keep `backend/supabase/migrations/` secondary; migrations are generated or reviewed deployment artifacts only.
+- Do not manually edit migrations as the primary source of schema design.
+- Preserve `backend/supabase/migrations/.gitkeep` when no migrations exist.
+- Do not run destructive remote Supabase commands from agent automation.
+- Local resets are allowed only for local Supabase databases and should rebuild from `backend/supabase/schema/*.sql`.
+- Document RLS validation for any table, policy, or storage access change.
 
 ## Validation
 

@@ -1,2 +1,3 @@
--- Fonte.bio local seed placeholder.
+-- Supabase CLI seed placeholder.
+-- Fonte.bio keeps reviewed local seed data in schema/99_seed.sql as part of the static schema SSOT.
 -- Keep this file free of secrets and production data.

@@ -7,14 +7,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Separator } from "@/components/ui/separator"
-
-const metrics = [
-  { label: "Videos catalogados", value: "1.284", trend: "+12%" },
-  { label: "Fontes verificadas", value: "326", trend: "+4%" },
-  { label: "Colecoes ativas", value: "48", trend: "+9%" },
-] as const
+import { Skeleton } from "@/components/ui/skeleton"
+import { useDashboardOverview } from "@/hooks/use-dashboard-overview"
 
 export function DashboardPage() {
+  const { data, error, isLoading } = useDashboardOverview()
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -40,7 +38,9 @@ export function DashboardPage() {
 
       <Card>
         <CardHeader>
-          <Badge variant="secondary" className="w-fit">Visao geral</Badge>
+          <Badge variant="secondary" className="w-fit">
+            {data?.backendMode === "supabase" ? "Supabase" : "Mock data"}
+          </Badge>
           <CardTitle className="text-3xl">Seu hub de conteudo tecnico</CardTitle>
           <CardDescription>
             Organize fontes, videos e colecoes em fluxos prontos para evoluir com Supabase.
@@ -48,25 +48,38 @@ export function DashboardPage() {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-3">
-            {metrics.map((metric) => (
-              <Card key={metric.label}>
-                <CardHeader className="pb-2">
-                  <CardDescription>{metric.label}</CardDescription>
-                  <CardTitle className="text-2xl">{metric.value}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Badge>{metric.trend}</Badge>
-                </CardContent>
-              </Card>
-            ))}
+            {isLoading
+              ? Array.from({ length: 3 }).map((_, index) => (
+                  <Card key={index}>
+                    <CardHeader className="pb-2">
+                      <Skeleton className="h-4 w-32" />
+                      <Skeleton className="h-8 w-20" />
+                    </CardHeader>
+                    <CardContent>
+                      <Skeleton className="h-5 w-14" />
+                    </CardContent>
+                  </Card>
+                ))
+              : data?.metrics.map((metric) => (
+                  <Card key={metric.label}>
+                    <CardHeader className="pb-2">
+                      <CardDescription>{metric.label}</CardDescription>
+                      <CardTitle className="text-2xl">{metric.value}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <Badge>{metric.trend}</Badge>
+                    </CardContent>
+                  </Card>
+                ))}
           </div>
           <Separator className="my-6" />
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
               <span className="text-muted-foreground">Saude do acervo</span>
-              <span className="font-medium">78%</span>
+              <span className="font-medium">{data?.healthScore ?? 0}%</span>
             </div>
-            <Progress value={78} />
+            <Progress value={data?.healthScore ?? 0} />
+            {error ? <p className="text-sm text-destructive">{error}</p> : null}
           </div>
         </CardContent>
         <CardFooter className="text-sm text-muted-foreground">

@@ -35,6 +35,7 @@ pnpm build      # build de producao
 pnpm preview    # preview da build
 pnpm lint       # lint do projeto
 pnpm typecheck  # checagem de tipos
+pnpm check      # lint + typecheck + build
 ```
 
 ## Estrutura de pastas
@@ -49,10 +50,30 @@ src/
     page-header.tsx
   features/            # paginas por dominio
   hooks/               # hooks compartilhados
-  lib/                 # utilitarios (ex.: cn)
+  lib/                 # utilitarios, api local e fronteira Supabase
   styles/              # estilos complementares da aplicacao
   index.css            # Tailwind v4 + tokens de tema
 ```
+
+## Dados e Supabase
+
+O frontend roda em modo mock por padrao. Para preparar integracao futura com Supabase, use apenas variaveis publicas do Vite:
+
+```bash
+cp .env.example .env.local
+```
+
+```env
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+```
+
+Regras:
+
+- Nunca commitar `.env.local` ou credenciais reais.
+- Nunca usar service role key no frontend.
+- Manter acesso ao Supabase isolado em `src/lib/supabase/`.
+- Manter tipos e funcoes de consulta em `src/lib/api/` antes de plugar em componentes.
 
 ## shadcn/ui
 

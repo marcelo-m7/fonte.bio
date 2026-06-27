@@ -5,8 +5,8 @@ This roadmap keeps early work traceable and intentionally staged. Each stage sho
 ## Near-Term PR Stack
 
 1. `chore: establish GitHub workflow and project roadmap` — merged.
-2. `feat: prepare Supabase data boundary` — open as PR #2; prepares mock/Supabase frontend boundary.
-3. `feat: establish end-to-end functional foundation` — stacked on PR #2; adds architecture docs, functional modules, and versioned Supabase structure.
+2. `feat: prepare Supabase data boundary` — merged; prepares mock/Supabase frontend boundary.
+3. `feat: establish end-to-end functional foundation` — adds architecture docs, functional modules, and versioned Supabase structure.
 4. `feat: add initial Supabase schema migrations` — creates first public/private tables and RLS policies.
 5. `feat: connect items module to Supabase` — replaces item shell APIs with typed Supabase queries.
 6. `feat: implement item creation and listing` — first user-visible item workflow.

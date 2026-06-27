@@ -40,6 +40,13 @@ feat/frontend-shell
 feat/supabase-base
 ```
 
+## Branch Hygiene
+
+- Delete only local branches that are clearly obsolete.
+- Never delete remote branches from agent automation.
+- Do not delete branches with unmerged or ambiguous work unless the user explicitly confirms.
+- When PRs were squash-merged, compare branch content against `main` before local cleanup.
+
 ## Pull Requests
 
 Each PR should be small and reviewable. Include:
@@ -49,6 +56,25 @@ Each PR should be small and reviewable. Include:
 - Screenshots for UI changes.
 - Environment variables added or changed.
 - Migration and RLS notes for Supabase changes.
+
+## Validation
+
+For frontend changes, run the available checks from `fonte.tube/frontend`:
+
+```bash
+pnpm check
+```
+
+For UI changes, also run the app and verify the main routes visually:
+
+- Dashboard
+- Biblioteca
+- Videos
+- Colecoes
+- Fontes
+- Definicoes
+- Light and dark mode
+- Desktop and mobile widths
 
 ## Reference Policy
 

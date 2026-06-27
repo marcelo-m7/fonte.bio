@@ -27,6 +27,16 @@ pnpm dev
 
 A aplicacao abre em `http://localhost:5173`.
 
+## QA visual local
+
+Depois de iniciar o servidor, verifique:
+
+- Dashboard com hero, metric cards e estados de dados mock.
+- Rotas Biblioteca, Videos, Colecoes, Fontes e Definicoes.
+- Sidebar e header em desktop e largura mobile.
+- Alternancia de tema claro/escuro.
+- Legibilidade dos empty states nos dois temas.
+
 ## Scripts
 
 ```bash

@@ -11,7 +11,7 @@ This roadmap keeps early work traceable and intentionally staged. Each stage sho
 5. `feat: integrate production Supabase with frontend` — applies the reviewed baseline remotely and connects frontend reads/writes through typed Supabase APIs.
 6. `feat: add TanStack Query module hooks` — adds the remote-state foundation for item, collection, source, and dashboard data.
 7. `feat: add Supabase Auth profile foundation` — adds login, signup, session state, and owner-only user profiles.
-8. `feat: implement item creation and listing` — first user-visible item workflow.
+8. `feat: implement catalog ingestion MVP` — first user-visible source, collection, item, and video catalog workflows.
 9. `feat: add ingestion jobs pipeline` — source ingestion jobs and operational statuses.
 10. `feat: add item processing Edge Function` — first real Edge Function flow.
 11. `feat: add AI enrichment MVP` — AI metadata enrichment with review workflow.
@@ -85,16 +85,17 @@ Deliverables:
 
 Goal: implement the first useful item catalog workflow.
 
-Status: production Supabase baseline is applied, TanStack Query is active, and Supabase Auth/Profile is the identity foundation for owner-based data.
+Status: production Supabase baseline is applied, TanStack Query is active, and Supabase Auth/Profile is the identity foundation for owner-based data. The catalog MVP should make sources, collections, items, and videos usable before deeper ingestion automation.
 
 Deliverables:
 
 - Authenticated user session.
 - Owner-only profile record.
-- Item list.
-- Item detail view.
-- Create/edit forms.
-- Basic filters and status fields.
+- Source registration and source list.
+- Collection creation and collection list.
+- Item creation and item list.
+- Video list derived from cataloged video items.
+- Basic filters and status fields in a later follow-up.
 
 ## Etapa 5: Ingestion Pipeline
 

@@ -16,6 +16,7 @@ export function useCreateCollection() {
     ...createCollectionMutationOptions(),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: collectionKeys.all })
+      void queryClient.invalidateQueries({ queryKey: ["dashboard"] })
     },
   })
 }

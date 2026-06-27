@@ -16,6 +16,7 @@ export function useCreateSource() {
     ...createSourceMutationOptions(),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: sourceKeys.all })
+      void queryClient.invalidateQueries({ queryKey: ["dashboard"] })
     },
   })
 }

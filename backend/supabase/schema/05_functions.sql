@@ -31,6 +31,22 @@ begin
 end;
 $$;
 
+revoke execute on function public.handle_new_user_profile() from public;
+revoke execute on function public.handle_new_user_profile() from anon;
+revoke execute on function public.handle_new_user_profile() from authenticated;
+
+do $$
+begin
+  if exists (select 1 from pg_proc where oid = 'public.rls_auto_enable()'::regprocedure) then
+    revoke execute on function public.rls_auto_enable() from public;
+    revoke execute on function public.rls_auto_enable() from anon;
+    revoke execute on function public.rls_auto_enable() from authenticated;
+  end if;
+exception
+  when undefined_function then
+    null;
+end $$;
+
 do $$
 begin
   if not exists (select 1 from pg_trigger where tgname = 'users_create_profile') then

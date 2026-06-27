@@ -64,7 +64,6 @@ create table if not exists public.collection_items (
 );
 
 create index if not exists sources_owner_id_idx on public.sources (owner_id);
-create index if not exists profiles_created_at_idx on public.profiles (created_at);
 create index if not exists collections_owner_id_idx on public.collections (owner_id);
 create index if not exists collections_visibility_idx on public.collections (visibility);
 create index if not exists items_owner_id_idx on public.items (owner_id);

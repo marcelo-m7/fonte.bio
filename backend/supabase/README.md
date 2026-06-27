@@ -16,7 +16,7 @@ backend/supabase/
     05_functions.sql
     99_seed.sql
   migrations/
-    .gitkeep
+    <timestamp>_<name>.sql
   functions/
   package.json
 ```
@@ -53,6 +53,8 @@ pnpm --dir backend/supabase supabase:schema:diff
 ```
 
 Review the generated migration in a PR. Do not manually edit migrations as the primary database source.
+
+The Supabase GitHub App also requires every remote migration version to exist in this directory. If a production migration was applied through MCP before a local file was committed, add a reviewed historical parity migration with the exact remote version and name. These parity files keep preview checks healthy; they do not replace `schema/*.sql` as the design source.
 
 ## Types
 

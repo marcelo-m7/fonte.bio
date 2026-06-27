@@ -9,7 +9,6 @@ Frontend do projeto Fonte Tube, construído com Vite + React + TypeScript e UI b
 - TypeScript 6
 - Tailwind CSS v4 (`@tailwindcss/vite`)
 - shadcn/ui (`style: new-york`, CSS variables, aliases `@/*`)
-- TanStack Query (remote state and cache)
 - Lucide React (icones)
 - Next Themes (dark mode)
 - Sonner (toasts)
@@ -32,7 +31,7 @@ A aplicacao abre em `http://localhost:5173`.
 
 Depois de iniciar o servidor, verifique:
 
-- Dashboard com hero, metric cards e badge `Supabase` quando as variaveis publicas estiverem configuradas.
+- Dashboard com hero, metric cards e estados de dados mock.
 - Rotas Biblioteca, Videos, Colecoes, Fontes e Definicoes.
 - Sidebar e header em desktop e largura mobile.
 - Alternancia de tema claro/escuro.
@@ -66,19 +65,9 @@ src/
   index.css            # Tailwind v4 + tokens de tema
 ```
 
-## Estado remoto
-
-Use TanStack Query nos arquivos de shell dos módulos:
-
-- `*.queries.ts` para hooks de leitura, como `useItems`.
-- `*.mutations.ts` para hooks de escrita, como `useCreateItem`.
-- `*.api.ts` como único ponto do módulo que chama Supabase.
-
-Components e páginas devem consumir hooks de módulo, não o client Supabase diretamente.
-
 ## Dados e Supabase
 
-O frontend usa Supabase quando as variaveis publicas do Vite estao configuradas. Sem essas variaveis, ele preserva modo mock para desenvolvimento local isolado.
+O frontend roda em modo mock por padrao. Para preparar integracao futura com Supabase, use apenas variaveis publicas do Vite:
 
 ```bash
 cp .env.example .env.local
@@ -93,19 +82,18 @@ Regras:
 
 - Nunca commitar `.env.local` ou credenciais reais.
 - Nunca usar service role key no frontend.
-- Usar apenas URL publica e publishable/anon key no browser, configuradas fora do git.
 - Manter acesso ao Supabase isolado em `src/lib/supabase/`.
-- Manter funcoes de consulta nas camadas `src/lib/api/` e `src/modules/*/*.api.ts`.
+- Manter tipos e funcoes de consulta em `src/lib/api/` antes de plugar em componentes.
 
 ## Supabase CLI
 
-Rode comandos Supabase a partir da raiz do repositorio `fonte.bio` e mantenha o working directory como `backend/supabase`.
+O projeto ainda nao e um monorepo com scripts globais. Rode comandos Supabase a partir da raiz do repositorio `fonte.bio` e mantenha o working directory como `backend/supabase`.
 
 ```bash
 supabase link --project-ref lgmwiuxvvapqcrqrcqdf --workdir backend/supabase
-pnpm --dir backend/supabase supabase:schema:reset
-pnpm --dir backend/supabase supabase:schema:apply
-pnpm --dir backend/supabase supabase:generate-types
+supabase db reset --workdir backend/supabase
+supabase db push --workdir backend/supabase
+supabase gen types typescript --project-id lgmwiuxvvapqcrqrcqdf > fonte.tube/frontend/src/shared/types/supabase.generated.ts
 supabase functions list --project-ref lgmwiuxvvapqcrqrcqdf
 ```
 
@@ -143,5 +131,4 @@ pnpm dlx shadcn@latest add accordion
 
 - Shell inicial com sidebar + header + toggle de tema.
 - Paginas base: Dashboard, Biblioteca, Videos, Colecoes, Fontes e Definicoes.
-- Supabase de producao aplicado com schema inicial e frontend conectado por URL/chave publica.
-- Supabase Auth com login, criacao de conta e perfil basico em Definicoes.
+- Sem integracao real com backend/Supabase nesta fase.

@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom"
 
+import { AuthStatus } from "@/components/layout/auth-status"
 import { ThemeToggle } from "@/components/layout/theme-toggle"
-import { Button } from "@/components/ui/button"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,6 +20,7 @@ const pageLabelByPath: Record<string, string> = {
   "/collections": "Colecoes",
   "/sources": "Fontes",
   "/settings": "Definicoes",
+  "/auth": "Entrar",
 }
 
 export function AppHeader() {
@@ -46,9 +47,7 @@ export function AppHeader() {
       </Breadcrumb>
 
       <div className="ml-auto flex items-center gap-2">
-        <Button variant="outline" size="sm">
-          Explorar acervo
-        </Button>
+        <AuthStatus />
         <ThemeToggle />
       </div>
     </header>

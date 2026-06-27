@@ -12,8 +12,39 @@ begin
 end;
 $$;
 
+create or replace function public.handle_new_user_profile()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  insert into public.profiles (id, display_name, avatar_url)
+  values (
+    new.id,
+    nullif(btrim(coalesce(new.raw_user_meta_data ->> 'display_name', split_part(new.email, '@', 1))), ''),
+    nullif(btrim(new.raw_user_meta_data ->> 'avatar_url'), '')
+  )
+  on conflict (id) do nothing;
+
+  return new;
+end;
+$$;
+
 do $$
 begin
+  if not exists (select 1 from pg_trigger where tgname = 'users_create_profile') then
+    create trigger users_create_profile
+    after insert on auth.users
+    for each row execute function public.handle_new_user_profile();
+  end if;
+
+  if not exists (select 1 from pg_trigger where tgname = 'profiles_set_updated_at') then
+    create trigger profiles_set_updated_at
+    before update on public.profiles
+    for each row execute function public.set_updated_at();
+  end if;
+
   if not exists (select 1 from pg_trigger where tgname = 'sources_set_updated_at') then
     create trigger sources_set_updated_at
     before update on public.sources

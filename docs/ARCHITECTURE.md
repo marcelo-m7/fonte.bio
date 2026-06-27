@@ -17,6 +17,7 @@ src/
   app/
   pages/
   modules/
+    auth/
     item/
     collection/
     source/

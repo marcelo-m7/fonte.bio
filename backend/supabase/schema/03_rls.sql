@@ -1,6 +1,7 @@
 -- Fonte.bio static schema SSOT: row-level security policies.
 
 alter table public.sources enable row level security;
+alter table public.profiles enable row level security;
 alter table public.collections enable row level security;
 alter table public.items enable row level security;
 alter table public.collection_items enable row level security;
@@ -8,6 +9,18 @@ alter table app_private.ingestion_jobs enable row level security;
 
 do $$
 begin
+  if not exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'profiles' and policyname = 'profiles_owner_select') then
+    create policy profiles_owner_select on public.profiles for select using (id = auth.uid());
+  end if;
+
+  if not exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'profiles' and policyname = 'profiles_owner_insert') then
+    create policy profiles_owner_insert on public.profiles for insert with check (id = auth.uid());
+  end if;
+
+  if not exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'profiles' and policyname = 'profiles_owner_update') then
+    create policy profiles_owner_update on public.profiles for update using (id = auth.uid()) with check (id = auth.uid());
+  end if;
+
   if not exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'sources' and policyname = 'sources_owner_select') then
     create policy sources_owner_select on public.sources for select using (owner_id = auth.uid());
   end if;

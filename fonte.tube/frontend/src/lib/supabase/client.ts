@@ -14,15 +14,3 @@ if (appEnv.hasSupabaseConfig && appEnv.supabaseUrl && appEnv.supabaseAnonKey) {
 export function getSupabaseClient() {
   return supabase
 }
-
-export function isSupabaseConfigured() {
-  return Boolean(supabase)
-}
-
-export function requireSupabaseClient() {
-  if (!supabase) {
-    throw new Error("Supabase is not configured for this environment.")
-  }
-
-  return supabase
-}

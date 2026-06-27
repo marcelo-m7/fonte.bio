@@ -1,6 +1,7 @@
 import { Navigate, createBrowserRouter } from "react-router-dom"
 
 import { AppShell } from "@/components/layout/app-shell"
+import { AuthPage } from "@/features/auth/auth-page"
 import { CollectionsPage } from "@/features/collections/collections-page"
 import { DashboardPage } from "@/features/dashboard/dashboard-page"
 import { LibraryPage } from "@/features/library/library-page"
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
       { path: "collections", element: <CollectionsPage /> },
       { path: "sources", element: <SourcesPage /> },
       { path: "settings", element: <SettingsPage /> },
+      { path: "auth", element: <AuthPage /> },
     ],
   },
 ])

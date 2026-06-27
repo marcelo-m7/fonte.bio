@@ -1,9 +1,13 @@
-import { jsonResponse, methodNotAllowed } from "./http.ts"
+import { corsResponse, jsonResponse, methodNotAllowed } from "./http.ts"
 
 type Handler = (request: Request) => Response | Promise<Response>
 
 export function createJsonHandler(allowedMethods: string[], handler: Handler) {
   return async (request: Request) => {
+    if (request.method === "OPTIONS") {
+      return corsResponse()
+    }
+
     if (!allowedMethods.includes(request.method)) {
       return methodNotAllowed(allowedMethods)
     }

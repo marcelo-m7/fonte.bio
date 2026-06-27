@@ -155,6 +155,10 @@ backend/supabase/functions/_shared
 
 Keep function handlers thin. Put deterministic transformations in frontend/backend functional core modules when possible, and keep Supabase/service-role work inside the imperative shell.
 
+`ingest-source` is the first operational function. It requires JWT auth, validates that the requested source belongs to the caller, writes an `app_private.ingestion_jobs` row with service-role-only RPC wrappers, and returns owner-scoped job summaries for the Sources page. Browser-facing Edge Functions must handle CORS preflight requests and include CORS headers in JSON responses.
+
+The service-role-only RPC wrappers `public.fonte_enqueue_ingestion_job` and `public.fonte_list_ingestion_jobs` are public-schema functions only because PostgREST RPC calls need an exposed schema. They must remain revoked from `public`, `anon`, and `authenticated`, and executable only by `service_role`.
+
 ## Secrets Rule
 
 Never commit:

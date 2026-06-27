@@ -13,7 +13,7 @@ This roadmap keeps early work traceable and intentionally staged. Each stage sho
 7. `feat: add Supabase Auth profile foundation` — adds login, signup, session state, and owner-only user profiles.
 8. `feat: implement catalog ingestion MVP` — first user-visible source, collection, item, and video catalog workflows.
 9. `feat: add ingestion jobs pipeline` — source ingestion jobs and operational statuses.
-10. `feat: add item processing Edge Function` — first real Edge Function flow.
+10. `feat: add item processing Edge Function` — deterministic item metadata processing from queued jobs.
 11. `feat: add AI enrichment MVP` — AI metadata enrichment with review workflow.
 
 ## Etapa 0: GitHub Workflow
@@ -101,12 +101,15 @@ Deliverables:
 
 Goal: define the pipeline for bringing external videos, links, and sources into the structured catalog.
 
+Status: `ingest-source` should be the first operational Edge Function. It receives the authenticated user JWT, validates source ownership, writes jobs to `app_private.ingestion_jobs` with service-role privileges, and returns only owner-scoped job summaries to the frontend.
+
 Deliverables:
 
 - Source registration flow.
 - Ingestion status model.
 - Manual import MVP.
 - Error and retry states.
+- Edge Function deployment and authenticated browser validation.
 
 ## Etapa 6: AI Enrichment
 

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 
-import { listSources } from "./source.api"
+import { listIngestionJobs, listSources } from "./source.api"
 import { sourceKeys } from "./source.keys"
 
 export function createSourcesQueryOptions() {
@@ -12,4 +12,15 @@ export function createSourcesQueryOptions() {
 
 export function useSources() {
   return useQuery(createSourcesQueryOptions())
+}
+
+export function createIngestionJobsQueryOptions() {
+  return {
+    queryKey: sourceKeys.ingestionJobs(),
+    queryFn: listIngestionJobs,
+  }
+}
+
+export function useIngestionJobs() {
+  return useQuery(createIngestionJobsQueryOptions())
 }

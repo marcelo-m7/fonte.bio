@@ -73,7 +73,7 @@ Do not batch unrelated changes into one PR.
 - [ ] Available checks were run locally.
 - [ ] Documentation was updated when behavior, setup, or workflow changed.
 - [ ] UI changes include screenshots or visual notes.
-- [ ] Supabase changes document migrations, RLS, and environment variables.
+- [ ] Supabase changes document static schema updates, derived migrations when needed, RLS, and environment variables.
 
 ## Checklist Before Merge
 
@@ -81,10 +81,17 @@ Do not batch unrelated changes into one PR.
 - [ ] PR description explains scope and intent.
 - [ ] Review comments are resolved.
 - [ ] CI checks pass.
-- [ ] Migrations are included when database schema changes.
+- [ ] Database schema changes start in `backend/supabase/schema/*.sql`.
+- [ ] Migrations are included only when needed as generated or reviewed deployment artifacts.
 - [ ] RLS policies are verified when Supabase tables or access rules change.
 - [ ] No secrets are present in the diff.
 - [ ] The branch can be safely squash-merged or merged according to the repository policy.
+
+## Supabase Schema Rule
+
+The fixed schema in `backend/supabase/schema/*.sql` is the source of truth for database structure. Migrations are not the manual design surface for Fonte.bio; they are secondary artifacts for controlled deployment when a PR needs one.
+
+Production must not receive automatic `DROP`, `RESET`, or broad remote schema commands from agent automation. Production changes require review through a PR and a deliberate deployment plan.
 
 ## Secrets Rule
 

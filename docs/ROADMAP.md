@@ -7,8 +7,8 @@ This roadmap keeps early work traceable and intentionally staged. Each stage sho
 1. `chore: establish GitHub workflow and project roadmap` — merged.
 2. `feat: prepare Supabase data boundary` — merged; prepares mock/Supabase frontend boundary.
 3. `feat: establish end-to-end functional foundation` — adds architecture docs, functional modules, and versioned Supabase structure.
-4. `feat: add initial Supabase schema migrations` — creates first public/private tables and RLS policies.
-5. `feat: connect items module to Supabase` — replaces item shell APIs with typed Supabase queries.
+4. `chore: adopt static Supabase schema workflow` — makes fixed SQL schema files the Supabase source of truth and keeps migrations secondary.
+5. `feat: add first Supabase-backed item workflow` — connects items to the reviewed static schema and typed Supabase queries.
 6. `feat: implement item creation and listing` — first user-visible item workflow.
 7. `feat: add ingestion jobs pipeline` — source ingestion jobs and operational statuses.
 8. `feat: add item processing Edge Function` — first real Edge Function flow.
@@ -50,7 +50,21 @@ Deliverables:
 - `.env.example` with public variable names only.
 - Supabase client boundary.
 - Initial database contracts.
-- Migration and RLS workflow notes.
+- Static schema and RLS workflow notes.
+- Derived migration guidance for controlled deployments.
+
+## Etapa 2.5: Static Supabase Schema
+
+Goal: make `backend/supabase/schema/*.sql` the source of truth for database structure before feature data work continues.
+
+PR target: `chore: adopt static Supabase schema workflow`.
+
+Deliverables:
+
+- Ordered fixed SQL schema files.
+- Local rebuild/apply/diff/type-generation scripts.
+- Documentation for RLS validation and production safety.
+- Clear rule that migrations are secondary, generated, or reviewed deploy artifacts.
 
 ## Etapa 3: Frontend Shell
 

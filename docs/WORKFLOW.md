@@ -74,6 +74,7 @@ Do not batch unrelated changes into one PR.
 - [ ] Documentation was updated when behavior, setup, or workflow changed.
 - [ ] UI changes include screenshots or visual notes.
 - [ ] Supabase changes document static schema updates, derived migrations when needed, RLS, and environment variables.
+- [ ] Supabase migrations in `backend/supabase/migrations/` include every remote migration version reported by the Supabase project.
 
 ## Checklist Before Merge
 
@@ -90,6 +91,8 @@ Do not batch unrelated changes into one PR.
 ## Supabase Schema Rule
 
 The fixed schema in `backend/supabase/schema/*.sql` is the source of truth for database structure. Migrations are not the manual design surface for Fonte.bio; they are secondary artifacts for controlled deployment when a PR needs one.
+
+Because the Supabase GitHub App validates migration history for preview databases, remote migration versions must also exist locally under `backend/supabase/migrations/`. If a migration was applied through MCP, add a reviewed historical parity file with the exact remote version/name in the next workflow PR.
 
 Production must not receive automatic `DROP`, `RESET`, or broad remote schema commands from agent automation. Production changes require review through a PR and a deliberate deployment plan.
 

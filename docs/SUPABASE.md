@@ -107,7 +107,7 @@ Use `(select auth.uid())` and `(select auth.role())` inside RLS policies so auth
 
 ## Migrations
 
-`backend/supabase/migrations/` is intentionally secondary. Keep `migrations/.gitkeep` even when there are no generated migrations.
+`backend/supabase/migrations/` is intentionally secondary. Keep migration files there as reviewed deploy artifacts or historical parity files for migrations already applied remotely.
 
 Migrations are acceptable only when a controlled deploy path needs a reviewed, derived artifact. In that case:
 
@@ -122,6 +122,8 @@ pnpm --dir backend/supabase supabase:schema:diff
 4. Review the generated migration in the PR.
 
 Do not hand-edit migrations as the primary source of schema design.
+
+The Supabase GitHub App fails preview checks when remote migration versions are missing from `backend/supabase/migrations/`. When MCP has already applied a production migration, commit a parity migration with the same `<version>_<name>.sql` filename so previews can reconcile history.
 
 ## Production Handling
 

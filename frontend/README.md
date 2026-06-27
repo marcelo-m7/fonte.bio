@@ -9,6 +9,7 @@ Frontend do projeto Fonte Tube, construído com Vite + React + TypeScript e UI b
 - TypeScript 6
 - Tailwind CSS v4 (`@tailwindcss/vite`)
 - shadcn/ui (`style: new-york`, CSS variables, aliases `@/*`)
+- TanStack Query (remote state and cache)
 - Lucide React (icones)
 - Next Themes (dark mode)
 - Sonner (toasts)
@@ -64,6 +65,16 @@ src/
   styles/              # estilos complementares da aplicacao
   index.css            # Tailwind v4 + tokens de tema
 ```
+
+## Estado remoto
+
+Use TanStack Query nos arquivos de shell dos módulos:
+
+- `*.queries.ts` para hooks de leitura, como `useItems`.
+- `*.mutations.ts` para hooks de escrita, como `useCreateItem`.
+- `*.api.ts` como único ponto do módulo que chama Supabase.
+
+Components e páginas devem consumir hooks de módulo, não o client Supabase diretamente.
 
 ## Dados e Supabase
 

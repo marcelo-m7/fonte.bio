@@ -5,6 +5,8 @@ import { listCollections } from "@/modules/collection"
 import { listItems } from "@/modules/item"
 import { listSources } from "@/modules/source"
 
+export const dashboardOverviewQueryKey = ["dashboard", "overview"] as const
+
 async function getDashboardFromSupabase(): Promise<DashboardOverview | null> {
   const supabase = getSupabaseClient()
 
@@ -37,6 +39,13 @@ async function getDashboardFromSupabase(): Promise<DashboardOverview | null> {
         trend: sources.length > 0 ? "Conectadas" : "Sem fontes",
       },
     ],
+  }
+}
+
+export function createDashboardOverviewQueryOptions() {
+  return {
+    queryKey: dashboardOverviewQueryKey,
+    queryFn: getDashboardOverview,
   }
 }
 

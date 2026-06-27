@@ -101,6 +101,10 @@ At minimum, validate that:
 
 `public.profiles` is owned by `auth.users.id` and uses owner-only select, insert, and update policies. New Supabase Auth users get a profile through the `users_create_profile` trigger on `auth.users`.
 
+Security definer functions used by triggers must not be callable through the public API. `public.handle_new_user_profile()` and the existing `public.rls_auto_enable()` helper have explicit execute revokes for `public`, `anon`, and `authenticated`.
+
+Use `(select auth.uid())` and `(select auth.role())` inside RLS policies so auth helper calls are evaluated once per statement instead of once per row.
+
 ## Migrations
 
 `backend/supabase/migrations/` is intentionally secondary. Keep `migrations/.gitkeep` even when there are no generated migrations.
@@ -194,3 +198,5 @@ If CLI flags change, prefer the official Supabase CLI help and keep this file up
 ## Current Phase
 
 The static schema workflow is active and the production baseline is applied. Frontend reads use the production Supabase project when public Vite variables are present. Supabase Auth is the browser identity provider, and `public.profiles` stores editable user-facing profile metadata.
+
+Security and performance advisors should be reviewed after every production DDL step. As of the Auth/Profile QA pass, the remaining security advisor is Supabase Auth leaked-password protection, which must be enabled from the Supabase Auth configuration surface rather than schema SQL. Remaining performance advisors are unused-index info notices on empty or seed-light tables and should be revisited after real traffic lands.

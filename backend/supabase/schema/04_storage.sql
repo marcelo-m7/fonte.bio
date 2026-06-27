@@ -18,31 +18,31 @@ begin
   if not exists (select 1 from pg_policies where schemaname = 'storage' and tablename = 'objects' and policyname = 'source_files_owner_select') then
     create policy source_files_owner_select on storage.objects for select using (
       bucket_id = 'source-files'
-      and owner = auth.uid()
+      and owner = (select auth.uid())
     );
   end if;
 
   if not exists (select 1 from pg_policies where schemaname = 'storage' and tablename = 'objects' and policyname = 'source_files_owner_insert') then
     create policy source_files_owner_insert on storage.objects for insert with check (
       bucket_id = 'source-files'
-      and owner = auth.uid()
+      and owner = (select auth.uid())
     );
   end if;
 
   if not exists (select 1 from pg_policies where schemaname = 'storage' and tablename = 'objects' and policyname = 'source_files_owner_update') then
     create policy source_files_owner_update on storage.objects for update using (
       bucket_id = 'source-files'
-      and owner = auth.uid()
+      and owner = (select auth.uid())
     ) with check (
       bucket_id = 'source-files'
-      and owner = auth.uid()
+      and owner = (select auth.uid())
     );
   end if;
 
   if not exists (select 1 from pg_policies where schemaname = 'storage' and tablename = 'objects' and policyname = 'source_files_owner_delete') then
     create policy source_files_owner_delete on storage.objects for delete using (
       bucket_id = 'source-files'
-      and owner = auth.uid()
+      and owner = (select auth.uid())
     );
   end if;
 end $$;

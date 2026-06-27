@@ -139,7 +139,7 @@ Suggested first tables for future migration PRs:
 - `audit_events`
 - `edge_rate_limits`
 
-This PR only prepares structure and contracts. It does not apply remote migrations.
+The current production baseline includes Auth/Profile, item, collection, source, collection-item, and ingestion-job foundations. Future domain changes should still begin in the static schema and move through reviewed PRs.
 
 ## PR Policy
 

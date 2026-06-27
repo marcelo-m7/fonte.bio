@@ -75,6 +75,18 @@ Regras:
 - Manter acesso ao Supabase isolado em `src/lib/supabase/`.
 - Manter tipos e funcoes de consulta em `src/lib/api/` antes de plugar em componentes.
 
+## Supabase CLI
+
+O projeto ainda nao e um monorepo com scripts globais. Rode comandos Supabase a partir da raiz do repositorio `fonte.bio` e mantenha o working directory como `backend/supabase`.
+
+```bash
+supabase link --project-ref lgmwiuxvvapqcrqrcqdf --workdir backend/supabase
+supabase db reset --workdir backend/supabase
+supabase db push --workdir backend/supabase
+supabase gen types typescript --project-id lgmwiuxvvapqcrqrcqdf > fonte.tube/frontend/src/shared/types/supabase.generated.ts
+supabase functions list --project-ref lgmwiuxvvapqcrqrcqdf
+```
+
 ## shadcn/ui
 
 ### Adicionar novos componentes

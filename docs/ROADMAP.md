@@ -2,6 +2,18 @@
 
 This roadmap keeps early work traceable and intentionally staged. Each stage should be delivered through a focused branch and pull request.
 
+## Near-Term PR Stack
+
+1. `chore: establish GitHub workflow and project roadmap` — merged.
+2. `feat: prepare Supabase data boundary` — open as PR #2; prepares mock/Supabase frontend boundary.
+3. `feat: establish end-to-end functional foundation` — stacked on PR #2; adds architecture docs, functional modules, and versioned Supabase structure.
+4. `feat: add initial Supabase schema migrations` — creates first public/private tables and RLS policies.
+5. `feat: connect items module to Supabase` — replaces item shell APIs with typed Supabase queries.
+6. `feat: implement item creation and listing` — first user-visible item workflow.
+7. `feat: add ingestion jobs pipeline` — source ingestion jobs and operational statuses.
+8. `feat: add item processing Edge Function` — first real Edge Function flow.
+9. `feat: add AI enrichment MVP` — AI metadata enrichment with review workflow.
+
 ## Etapa 0: GitHub Workflow
 
 Goal: establish branch, commit, issue, and pull request conventions before product implementation continues.
@@ -18,6 +30,8 @@ Deliverables:
 
 Goal: define the repository shape for frontend, backend-adjacent assets, docs, and future packages.
 
+PR target: `feat: establish end-to-end functional foundation`.
+
 Deliverables:
 
 - Confirm folder layout.
@@ -29,6 +43,8 @@ Deliverables:
 
 Goal: prepare Supabase integration without leaking secrets or coupling UI directly to database schemas.
 
+PR target: `feat: prepare Supabase data boundary` plus the stacked E2E foundation PR.
+
 Deliverables:
 
 - `.env.example` with public variable names only.
@@ -39,6 +55,8 @@ Deliverables:
 ## Etapa 3: Frontend Shell
 
 Goal: create the base Fonte.bio/Fonte Tube interface shell.
+
+Status: initial shell exists in `fonte.tube/frontend`; future PRs should migrate new domain work into `src/modules/`.
 
 Deliverables:
 

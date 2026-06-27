@@ -70,7 +70,7 @@ Deliverables:
 
 Goal: create the base Fonte.bio/Fonte Tube interface shell.
 
-Status: initial shell exists in `fonte.tube/frontend`; future PRs should migrate new domain work into `src/modules/`.
+Status: initial shell exists in `frontend/`; future PRs should migrate new domain work into `src/modules/`.
 
 Deliverables:
 

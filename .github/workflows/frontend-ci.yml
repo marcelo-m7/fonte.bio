@@ -3,11 +3,11 @@ name: Frontend CI
 on:
   push:
     paths:
-      - "fonte.tube/frontend/**"
+      - "frontend/**"
       - ".github/workflows/frontend-ci.yml"
   pull_request:
     paths:
-      - "fonte.tube/frontend/**"
+      - "frontend/**"
       - ".github/workflows/frontend-ci.yml"
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: fonte.tube/frontend
+        working-directory: frontend
 
     steps:
       - name: Checkout
@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-          cache-dependency-path: fonte.tube/frontend/pnpm-lock.yaml
+          cache-dependency-path: frontend/pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

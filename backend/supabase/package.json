@@ -6,6 +6,6 @@
     "supabase:schema:reset": "bash scripts/reset-static-schema.sh",
     "supabase:schema:apply": "bash scripts/apply-static-schema.sh",
     "supabase:schema:diff": "supabase db diff --local --schema public,app_private,storage --file static_schema_review --workdir .",
-    "supabase:generate-types": "supabase gen types typescript --local --schema public,app_private > ../../fonte.tube/frontend/src/shared/types/supabase.generated.ts"
+    "supabase:generate-types": "supabase gen types typescript --local --schema public,app_private > ../../frontend/src/shared/types/supabase.generated.ts"
   }
 }

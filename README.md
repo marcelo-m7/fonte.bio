@@ -7,8 +7,7 @@ Fonte.bio is being built through small, traceable pull requests before broad fea
 ```text
 backend/
   supabase/        # static Supabase schema source of truth, config, and Edge Functions
-fonte.tube/
-  frontend/        # Vite + React + TypeScript + shadcn/ui frontend
+frontend/          # Vite + React + TypeScript + shadcn/ui frontend
 docs/              # workflow, architecture, roadmap, and Supabase notes
 ```
 
@@ -28,7 +27,7 @@ See [docs/WORKFLOW.md](docs/WORKFLOW.md) for the official workflow.
 Frontend checks:
 
 ```bash
-cd fonte.tube/frontend
+cd frontend
 pnpm install
 pnpm check
 ```
@@ -40,7 +39,7 @@ pnpm check
 When the frontend changes, run:
 
 ```bash
-cd fonte.tube/frontend
+cd frontend
 pnpm dev
 ```
 

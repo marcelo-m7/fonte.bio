@@ -70,7 +70,7 @@ Each PR should be small and reviewable. Include:
 
 ## Validation
 
-For frontend changes, run the available checks from `fonte.tube/frontend`:
+For frontend changes, run the available checks from `frontend`:
 
 ```bash
 pnpm check

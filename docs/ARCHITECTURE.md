@@ -8,7 +8,7 @@ This branch is stacked on top of PR #2, `feat: prepare Supabase data boundary`, 
 
 ## Frontend Organization
 
-The frontend lives in `fonte.tube/frontend`.
+The frontend lives in `frontend/` at the repository root.
 
 The target structure is intentionally simpler than pure Feature-Sliced Design:
 

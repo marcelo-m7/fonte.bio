@@ -15,6 +15,14 @@ begin
   end if;
 end $$;
 
+create table if not exists public.profiles (
+  id uuid primary key references auth.users (id) on delete cascade,
+  display_name text check (display_name is null or length(btrim(display_name)) > 0),
+  avatar_url text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
 create table if not exists public.sources (
   id uuid primary key default extensions.gen_random_uuid(),
   owner_id uuid not null references auth.users (id) on delete cascade,
@@ -56,6 +64,7 @@ create table if not exists public.collection_items (
 );
 
 create index if not exists sources_owner_id_idx on public.sources (owner_id);
+create index if not exists profiles_created_at_idx on public.profiles (created_at);
 create index if not exists collections_owner_id_idx on public.collections (owner_id);
 create index if not exists collections_visibility_idx on public.collections (visibility);
 create index if not exists items_owner_id_idx on public.items (owner_id);

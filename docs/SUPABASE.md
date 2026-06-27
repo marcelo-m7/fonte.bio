@@ -99,6 +99,8 @@ At minimum, validate that:
 - Public rows are readable according to the documented policy.
 - Storage objects follow the same ownership boundary.
 
+`public.profiles` is owned by `auth.users.id` and uses owner-only select, insert, and update policies. New Supabase Auth users get a profile through the `users_create_profile` trigger on `auth.users`.
+
 ## Migrations
 
 `backend/supabase/migrations/` is intentionally secondary. Keep `migrations/.gitkeep` even when there are no generated migrations.
@@ -191,4 +193,4 @@ If CLI flags change, prefer the official Supabase CLI help and keep this file up
 
 ## Current Phase
 
-The static schema workflow is active and the first production baseline is applied. Frontend reads now use the production Supabase project when public Vite variables are present.
+The static schema workflow is active and the production baseline is applied. Frontend reads use the production Supabase project when public Vite variables are present. Supabase Auth is the browser identity provider, and `public.profiles` stores editable user-facing profile metadata.

@@ -10,10 +10,11 @@ This roadmap keeps early work traceable and intentionally staged. Each stage sho
 4. `chore: adopt static Supabase schema workflow` — makes fixed SQL schema files the Supabase source of truth and keeps migrations secondary.
 5. `feat: integrate production Supabase with frontend` — applies the reviewed baseline remotely and connects frontend reads/writes through typed Supabase APIs.
 6. `feat: add TanStack Query module hooks` — adds the remote-state foundation for item, collection, source, and dashboard data.
-7. `feat: implement item creation and listing` — first user-visible item workflow.
-8. `feat: add ingestion jobs pipeline` — source ingestion jobs and operational statuses.
-9. `feat: add item processing Edge Function` — first real Edge Function flow.
-10. `feat: add AI enrichment MVP` — AI metadata enrichment with review workflow.
+7. `feat: add Supabase Auth profile foundation` — adds login, signup, session state, and owner-only user profiles.
+8. `feat: implement item creation and listing` — first user-visible item workflow.
+9. `feat: add ingestion jobs pipeline` — source ingestion jobs and operational statuses.
+10. `feat: add item processing Edge Function` — first real Edge Function flow.
+11. `feat: add AI enrichment MVP` — AI metadata enrichment with review workflow.
 
 ## Etapa 0: GitHub Workflow
 
@@ -84,10 +85,12 @@ Deliverables:
 
 Goal: implement the first useful item catalog workflow.
 
-Status: production Supabase baseline is applied and module API shells are wired to typed Supabase queries. TanStack Query should provide module read/write hooks before user-facing item forms and authenticated flows expand.
+Status: production Supabase baseline is applied, TanStack Query is active, and Supabase Auth/Profile is the identity foundation for owner-based data.
 
 Deliverables:
 
+- Authenticated user session.
+- Owner-only profile record.
 - Item list.
 - Item detail view.
 - Create/edit forms.

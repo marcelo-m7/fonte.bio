@@ -31,7 +31,7 @@ A aplicacao abre em `http://localhost:5173`.
 
 Depois de iniciar o servidor, verifique:
 
-- Dashboard com hero, metric cards e estados de dados mock.
+- Dashboard com hero, metric cards e badge `Supabase` quando as variaveis publicas estiverem configuradas.
 - Rotas Biblioteca, Videos, Colecoes, Fontes e Definicoes.
 - Sidebar e header em desktop e largura mobile.
 - Alternancia de tema claro/escuro.
@@ -67,7 +67,7 @@ src/
 
 ## Dados e Supabase
 
-O frontend roda em modo mock por padrao. Para preparar integracao futura com Supabase, use apenas variaveis publicas do Vite:
+O frontend usa Supabase quando as variaveis publicas do Vite estao configuradas. Sem essas variaveis, ele preserva modo mock para desenvolvimento local isolado.
 
 ```bash
 cp .env.example .env.local
@@ -82,18 +82,19 @@ Regras:
 
 - Nunca commitar `.env.local` ou credenciais reais.
 - Nunca usar service role key no frontend.
+- Usar apenas URL publica e publishable/anon key no browser, configuradas fora do git.
 - Manter acesso ao Supabase isolado em `src/lib/supabase/`.
-- Manter tipos e funcoes de consulta em `src/lib/api/` antes de plugar em componentes.
+- Manter funcoes de consulta nas camadas `src/lib/api/` e `src/modules/*/*.api.ts`.
 
 ## Supabase CLI
 
-O projeto ainda nao e um monorepo com scripts globais. Rode comandos Supabase a partir da raiz do repositorio `fonte.bio` e mantenha o working directory como `backend/supabase`.
+Rode comandos Supabase a partir da raiz do repositorio `fonte.bio` e mantenha o working directory como `backend/supabase`.
 
 ```bash
 supabase link --project-ref lgmwiuxvvapqcrqrcqdf --workdir backend/supabase
-supabase db reset --workdir backend/supabase
-supabase db push --workdir backend/supabase
-supabase gen types typescript --project-id lgmwiuxvvapqcrqrcqdf > fonte.tube/frontend/src/shared/types/supabase.generated.ts
+pnpm --dir backend/supabase supabase:schema:reset
+pnpm --dir backend/supabase supabase:schema:apply
+pnpm --dir backend/supabase supabase:generate-types
 supabase functions list --project-ref lgmwiuxvvapqcrqrcqdf
 ```
 
@@ -131,4 +132,4 @@ pnpm dlx shadcn@latest add accordion
 
 - Shell inicial com sidebar + header + toggle de tema.
 - Paginas base: Dashboard, Biblioteca, Videos, Colecoes, Fontes e Definicoes.
-- Sem integracao real com backend/Supabase nesta fase.
+- Supabase de producao aplicado com schema inicial e frontend conectado por URL/chave publica.

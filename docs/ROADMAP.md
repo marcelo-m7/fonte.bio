@@ -8,7 +8,7 @@ This roadmap keeps early work traceable and intentionally staged. Each stage sho
 2. `feat: prepare Supabase data boundary` — merged; prepares mock/Supabase frontend boundary.
 3. `feat: establish end-to-end functional foundation` — adds architecture docs, functional modules, and versioned Supabase structure.
 4. `chore: adopt static Supabase schema workflow` — makes fixed SQL schema files the Supabase source of truth and keeps migrations secondary.
-5. `feat: add first Supabase-backed item workflow` — connects items to the reviewed static schema and typed Supabase queries.
+5. `feat: integrate production Supabase with frontend` — applies the reviewed baseline remotely and connects frontend reads/writes through typed Supabase APIs.
 6. `feat: implement item creation and listing` — first user-visible item workflow.
 7. `feat: add ingestion jobs pipeline` — source ingestion jobs and operational statuses.
 8. `feat: add item processing Edge Function` — first real Edge Function flow.
@@ -82,6 +82,8 @@ Deliverables:
 ## Etapa 4: Items MVP
 
 Goal: implement the first useful item catalog workflow.
+
+Status: production Supabase baseline is applied and module API shells are wired to typed Supabase queries. The next PR should add user-facing item forms and authenticated flows.
 
 Deliverables:
 

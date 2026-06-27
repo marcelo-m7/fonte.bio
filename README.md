@@ -6,7 +6,7 @@ Fonte.bio is being built through small, traceable pull requests before broad fea
 
 ```text
 backend/
-  supabase/        # versioned Supabase config, migrations, seed, and Edge Functions
+  supabase/        # static Supabase schema source of truth, config, and Edge Functions
 fonte.tube/
   frontend/        # Vite + React + TypeScript + shadcn/ui frontend
 docs/              # workflow, architecture, roadmap, and Supabase notes
@@ -54,6 +54,6 @@ Then verify:
 
 ## Supabase
 
-Supabase source is versioned under [backend/supabase](backend/supabase). The Supabase GitHub integration should use `backend` as the working directory.
+Supabase source is versioned under [backend/supabase](backend/supabase). The fixed SQL schema in [backend/supabase/schema](backend/supabase/schema) is the source of truth. The Supabase GitHub integration should use `backend` as the working directory.
 
 See [docs/SUPABASE.md](docs/SUPABASE.md) for project ref, commands, and secret-handling rules.

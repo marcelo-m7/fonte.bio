@@ -156,3 +156,5 @@ Keep implementation traceable:
 ## Reference Policy
 
 Do not copy FACODI-specific patterns. When technical comparison is useful, use only `marcelo-m7/tube-o2` branch `facodi` as inspiration and adapt intentionally for Fonte.bio.
+
+The public Tube O2 experience at `https://tube.open2.tech` is useful as product reference for ingestion language: submitted links, living categories, playlists, quick curation, editorial review, and learning paths. Fonte.bio should use those concepts as lightweight vocabulary, not as a schema mandate.

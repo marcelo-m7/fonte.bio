@@ -145,3 +145,4 @@ pnpm dlx shadcn@latest add accordion
 - Paginas base: Dashboard, Biblioteca, Videos, Colecoes, Fontes e Definicoes.
 - Supabase de producao aplicado com schema inicial e frontend conectado por URL/chave publica.
 - Supabase Auth com login, criacao de conta e perfil basico em Definicoes.
+- Catalogo inicial com cadastro/listagem de fontes, colecoes, itens e videos derivados dos itens.

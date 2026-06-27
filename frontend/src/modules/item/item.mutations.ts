@@ -16,6 +16,7 @@ export function useCreateItem() {
     ...createItemMutationOptions(),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: itemKeys.all })
+      void queryClient.invalidateQueries({ queryKey: ["dashboard"] })
     },
   })
 }

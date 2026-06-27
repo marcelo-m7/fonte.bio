@@ -100,12 +100,12 @@ export function DashboardPage() {
               <VideoIcon className="size-5" />
               Proximas evolucoes
             </CardTitle>
-            <CardDescription>Roadmap inicial para o frontend Fonte Tube.</CardDescription>
+            <CardDescription>Proximas entregas depois do catalogo inicial.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-muted-foreground">
-            <p>- Integracao com Supabase para leitura/escrita de acervo.</p>
-            <p>- Busca semantica e filtros combinados para videos/fontes.</p>
-            <p>- Colecoes colaborativas com trilhas de conhecimento.</p>
+            <p>- Jobs de ingestao para acompanhar fontes e status operacional.</p>
+            <p>- Processamento de itens com metadados, resumo e classificacao.</p>
+            <p>- Revisao editorial antes de publicar trilhas e colecoes.</p>
           </CardContent>
         </Card>
       </div>

@@ -1,0 +1,19 @@
+project_id = "lgmwiuxvvapqcrqrcqdf"
+
+[api]
+enabled = true
+
+[db]
+major_version = 15
+
+[functions.ingest-source]
+verify_jwt = true
+
+[functions.process-item]
+verify_jwt = true
+
+[functions.suggest-collections]
+verify_jwt = true
+
+[functions.publish-item]
+verify_jwt = true

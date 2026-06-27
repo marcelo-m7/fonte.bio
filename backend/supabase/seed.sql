@@ -1,0 +1,2 @@
+-- Fonte.bio local seed placeholder.
+-- Keep this file free of secrets and production data.
